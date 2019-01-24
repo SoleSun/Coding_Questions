@@ -1,0 +1,20 @@
+In-Order Traversal, as the name suggests, lists the elements of the trees and their IDs in ascending order.
+It is useful for verifying a binary search tree, which is expected to have its smallest elements in the
+leftmost leaf and its greatest element in the right most leaf. The logic is as follows:
+
+    traverse left 
+    visit root
+    traverse right
+
+Pre-Order Traversal is useful for copying BST. 
+    visit root
+    traverse left
+    traverse right
+
+Post-Order Traversal is used to delete the tree. The left and right traversals are interchangeable. All that
+needs to happen is that the children be deleted before the parent. 
+    traverse left
+    traverse right
+    visit root
+    
+In - Order Traversal is breadth-first search of a binary tree. 
