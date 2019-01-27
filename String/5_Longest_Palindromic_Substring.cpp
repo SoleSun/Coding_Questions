@@ -5,7 +5,47 @@ class Solution
 public:
 	Solution(){};
 	
-	std::string longestPalindrome(std::string s) 
+    std::string longestPalindrome(std::string s) 
+    {
+        std::string longest_palindrome = "";
+        int start = 0, end = 0;
+
+        if (s.size() >= 1)
+        {
+            for (unsigned int i = 0; i < s.size(); i++)
+            {
+                int odd  = expandAroundCentre(s, i, i);
+                int even = expandAroundCentre(s, i, i+1);
+                int len = odd > even ? odd : even;
+                if (len > (end - start))
+                {
+                    start = i - ((len-1) / 2);
+                    end   = i + (len / 2);
+                }
+            }
+
+            longest_palindrome = s.substr(start, (end-start)+1);
+        }
+
+        return longest_palindrome;
+    }
+
+    int expandAroundCentre(std::string s, int L, int R)
+    {
+        int left_ = L, right_ = R; 
+
+        while((left_ >= 0) && 
+              (right_ < s.size()) && 
+              (s[left_] == s[right_]) )
+        {
+            left_--;
+            right_++;
+        }
+
+        return right_ - left_ - 1;
+    }
+
+	std::string longestPalindromeOld(std::string s) 
 	{
 		std::string longest_palindrome;
     	std::string buffer; 
@@ -62,10 +102,10 @@ int main()
 
 	Solution sol;
 	
-	std::cout << sol.longestPalindromeOpt(test1) << std::endl;
-	std::cout << sol.longestPalindromeOpt(test2) << std::endl;
-	std::cout << sol.longestPalindromeOpt(test3) << std::endl;
-	std::cout << sol.longestPalindromeOpt(test4) << std::endl;
+	std::cout << sol.longestPalindrome(test1) << std::endl;
+	std::cout << sol.longestPalindrome(test2) << std::endl;
+	std::cout << sol.longestPalindrome(test3) << std::endl;
+	std::cout << sol.longestPalindrome(test4) << std::endl;
 
 	return 0;
 }
