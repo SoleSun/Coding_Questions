@@ -1,8 +1,10 @@
 * find the median of two sorted arrays
 
-* serialise and deserialise a linked list
+*  
 
 * construct a binary tree fro given inorder and preorder traversals
+
+* construct a binary tree from given preorder and postorder traversals 
 
 * return a tree such that each internal node stores sum of all its child node. Each leaf node stores zero. 
 

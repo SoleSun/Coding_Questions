@@ -12,35 +12,34 @@ public:
         {
         	// currentLevel represents the current water table
         	int low          = 0;
-		    int high         = height.size()-1;
-        	// int currentLevel = height[low] >= height[high] ?
-        	// 				   height[low]                 :
-        	// 				   height[high];
-        	int currentLevel = 0;
-			int prevCurrLev  = 0;        					  
-        	int width        = 0;
+            int high         = height.size()-1;
+        	int currentLevel = 0; // the maximum height that can be currently contained 
+                                  // between the walls
+            int prevCurrLev  = 0; // the previously maximum height
+        	int minHeight    = 0; // the smaller height between the two iterators
 
         	while (low < high)
         	{
         		int subtractor;
         		// The lower of the two heights represents the water table
-			    width = height[low] <= height[high] ?
+			    minHeight = height[low] <= height[high] ?
 					    height[low]                 :
 						height[high];
- 
-       			if(width > currentLevel)
+                
+                // If the height of the walls 
+       			if(minHeight > currentLevel)
        			{
        				// Subtract the height differential of the current block
    					// from the water table
 					subtractor   = currentLevel;
        				prevCurrLev  = currentLevel;
-       				currentLevel = width;
+       				currentLevel = minHeight;
 
-                    volume += ((high - low - 1) * (width - prevCurrLev));
+                    volume += ((high - low - 1) * (minHeight - prevCurrLev));
        			} 
        			else
        			{
-       				subtractor = width;
+       				subtractor = minHeight;
        			}
 
        			// Subtract the height differential of the current block
@@ -48,8 +47,6 @@ public:
 				volume = volume - subtractor >= 0 ?  
 		                 volume - subtractor      :
 		                 0;
-                
-                // if (width > currentLevel)
 
        			if (height[low] <= height[high]) 
    				{
